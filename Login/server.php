@@ -1,11 +1,9 @@
 <?php
-//call library
-  require_once 'nusoap/nusoap/lib/nusoap.php';
-  require_once 'adodb/adodb/adodb/adodb.inc.php';
+  require_once 'nusoap/lib/nusoap.php';
+  require_once 'adodb/adodb.inc.php';
   $server = new nusoap_server();
   $server->configureWSDL('server','urn:server');
   $server->wsdl->schemaTargetNamespace = 'urn:server';
-  
   //register a function that works on server 
   $server->register('login_ws', 
     array(
@@ -22,11 +20,11 @@
     ); //description
       
     //create function
-    function login_ws($username, $password) { 
-	//enkripsi password dengan md5 $password = md5($password);
+    function login_ws($username, $password) { //enkripsi password dengan md5 $password = md5($password);
       //buat koneksi
       $db = NewADOConnection('mysql');
-      $db -> Connect('127.0.0.1','root','','data_mahasiswa'); //cek username dan password dari database
+      $password = md5($password);
+      $db -> Connect('127.0.0.1','root','','module_sit'); //cek username dan password dari database
       $sql = $db -> Execute("SELECT * FROM user where username='$username' AND password='$password'");
       //Cek adanya username dan password di database
       if ($sql->RecordCount() >= 1) //sama dengan mysql_num_rows pada php biasa
