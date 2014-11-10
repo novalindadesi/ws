@@ -3,9 +3,9 @@ error_reporting(E_ALL);
 ini_set('display_error',1);
 session_start();
 //panggil library
-require_once('nusoap/lib/nusoap.php');
+require_once('nusoap/nusoap/lib/nusoap.php');
 //mendefinisikan alamat url service yang disediakan oleh client 
-$url = 'http://localhost/dev/ws/wsdl/server.php?wsdl';
+$url = 'http://localhost/ws.git/Login/server.php?wsdl';
 // $client = new soapclient($url); 
 $client = new nusoap_client($url, 'WSDL');
 $username =  isset($_POST["username"]) ? $_POST["username"] : 'admin' ;
